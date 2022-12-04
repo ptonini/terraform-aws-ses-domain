@@ -14,7 +14,8 @@ resource "aws_ses_email_identity" "this" {
 }
 
 module "dns_txt_record" {
-  source = "github.com/ptonini/terraform-aws-route53-record?ref=v1"
+  source = "ptonini/route53-record/aws"
+  version = "~> 1.0.0"
   route53_zone = var.route53_zone
   name = "_amazonses.nodis.com.br"
   type = "TXT"
@@ -27,7 +28,8 @@ module "dns_txt_record" {
 }
 
 module "dns_cname_record" {
-  source = "github.com/ptonini/terraform-aws-route53-record?ref=v1"
+  source = "ptonini/route53-record/aws"
+  version = "~> 1.0.0"
   count = 3
   route53_zone = var.route53_zone
   name = "${element(aws_ses_domain_dkim.this.dkim_tokens, count.index)}._domainkey.nodis.com.br"
