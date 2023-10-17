@@ -1,5 +1,10 @@
 variable "domain" {}
 
-variable "email_identity" {}
+variable "route53_zone" {
+  default = null
+}
 
-variable "route53_zone" {}
+variable "email_identities" {
+  type    = set(string)
+  default = []
+}
