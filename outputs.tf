@@ -9,3 +9,7 @@ output "dkim" {
 output "dns_records" {
   value = local.dns_records
 }
+
+output "policy_arn" {
+  value = module.policy.this.arn
+}
