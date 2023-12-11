@@ -20,15 +20,14 @@ resource "aws_ses_domain_dkim" "this" {
 
 module "policy" {
   source  = "ptonini/iam-policy/aws"
-  version = "~> 1.0.0"
-  policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [{
-      Effect   = "Allow"
-      Action   = "ses:SendRawEmail"
-      Resource = aws_ses_domain_identity.this.arn
-    }]
-  })
+  version = "~> 2.0.0"
+  name    = "ses-send-mail-from-${var.domain}"
+  statement = [{
+    Effect   = "Allow"
+    Action   = "ses:SendRawEmail"
+    Resource = aws_ses_domain_identity.this.arn
+  }]
+
 }
 
 module "dns_records" {
